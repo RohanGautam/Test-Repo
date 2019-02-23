@@ -6,9 +6,23 @@
     <title>Get image</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
+    <script src='https://cdn.jsdelivr.net/gh/naptha/tesseract.js@v1.0.14/dist/tesseract.min.js'></script>
+    <!-- <script src="main.js"></script> -->
 </head>
 <body>
-    <input type="file" accept="image/*" capture="environment">
+    <input type="file" accept="image/*" id="file-input">
+    <script>
+        const fileInput = document.getElementById('file-input');
+
+        fileInput.addEventListener('change', function (e){
+            fileObj=e.target.files[0]
+            console.log('Change triggered')
+            Tesseract.recognize(fileObj).then(function(result){
+                var output = result.text.replace('—','')
+                console.log(output)
+            })
+
+        })
+    </script>
 </body>
 </html>
