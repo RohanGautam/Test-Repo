@@ -11,6 +11,7 @@
 </head>
 <body>
     <input type="file" accept="image/*" id="file-input">
+    <p id="output-text"></p>
     <script>
         const fileInput = document.getElementById('file-input');
 
@@ -19,10 +20,12 @@
             console.log('Change triggered')
             Tesseract.recognize(fileObj).then(function(result){
                 var output = result.text.replace('—','')
+                document.getElementById('output-text').innerHTML=output
                 console.log(output)
             })
 
         })
     </script>
+    
 </body>
 </html>
